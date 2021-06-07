@@ -99,15 +99,13 @@ public class TripDaoImpl implements TripDao{
 		
 		@Override
 		public void updateTrip(Trip trip) {
-			// 
 			String sql="UPDATE trips set customer_name=:customer_name, date=:date,dist=:dist, duration=:duration, charges=:charges, registration_no=:registration_no, driv_no=:driv_no, pickup_point=:pickup_point, drop_point=:drop_point, rating=:rating where trip_id=:trip_id";
 			jt.update(sql,getSqlParameterByModel(trip));
 			 
 		}
 
 		@Override
-		public void deleteTrip(Integer trip_id) {
-			// 
+		public void deleteTrip(Integer trip_id) { 
 			String sql="DELETE FROM trips WHERE trip_id=:trip_id";
 			namedParameterJdbcTemplate.update(sql,getSqlParameterByModel(new Trip(trip_id)));
 			
@@ -115,7 +113,6 @@ public class TripDaoImpl implements TripDao{
 
 		@Override
 		public Trip findTripByTripId(Integer trip_id) {
-			// TODO Auto-generated method stub
 			String sql="SELECT * FROM trips WHERE trip_id=:trip_id";
 		return	namedParameterJdbcTemplate.queryForObject(sql, getSqlParameterByModel(new Trip(trip_id)),new TripMapper() );
 			
@@ -123,7 +120,6 @@ public class TripDaoImpl implements TripDao{
 
 		@Override
 		public List<Trip> findTripsByDrivNo (Integer driv_no) {
-			// TODO Auto-generated method stub
 			String sql = "SELECT * FROM trips WHERE driv_no =: driv_no";
 			 List<Trip> list = namedParameterJdbcTemplate.query(sql, getSqlParameterByModel(null), new TripMapper()  );
 			return list;
@@ -131,7 +127,6 @@ public class TripDaoImpl implements TripDao{
 		@Override
 		public Integer rateTrips(Integer trip_id,Integer charges, Integer rating)
 		{
-			System.out.println("jai ho sabki");
 			String sql = "update trips set rating =? where trip_id=? and charges=?";
 			jt.update(sql,new Object[] {rating,trip_id,charges});
 			return trip_id;
@@ -139,7 +134,6 @@ public class TripDaoImpl implements TripDao{
 		
 		@Override
 		public Trip findDrivIdByTripId(Integer trip_id) {
-			// TODO Auto-generated method stub
 			String sql="SELECT driv_no FROM trips WHERE trip_id=:trip_id";
 		return	namedParameterJdbcTemplate.queryForObject(sql, getSqlParameterByModel(new Trip(trip_id)),new TripMapper() );
 		}
